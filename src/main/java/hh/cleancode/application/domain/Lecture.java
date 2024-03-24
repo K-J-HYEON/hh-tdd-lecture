@@ -1,10 +1,10 @@
 package hh.cleancode.application.domain;
 
-import hh.cleancode.application.domain.Application;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -14,12 +14,14 @@ public class Lecture {
 
     @Id @GeneratedValue
     @Column(name = "lecture_id")
-    private Long lectureId;
+    private long id;
 
-    @OneToMany
+    @Column(name = "name")
+    private String name;
+
+    @OneToMany(mappedBy = "lecture")
     @JoinColumn(name = "application_id")
-    private Application application;
-
+    private List<Application> application = new ArrayList<>();
 
     private LocalDateTime lectureDate;
 }

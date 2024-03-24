@@ -2,7 +2,6 @@ package hh.cleancode.application.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +14,16 @@ public class RegistrationInfo {
 
     @Id @GeneratedValue
     @Column(name = "registration_id")
-    private long registrationId;
+    private long id;
 
     private LocalDateTime applicationDate;
 
     private boolean applicationStatus;
 
-    @OneToMany(mappedBy = "registration")
-    private List<ApplicationRegistrationInfo> applicationRegistrationInfos = new ArrayList<>();
+    @OneToMany(mappedBy = "registrationInfo")
+    @JoinColumn(name = "application_registration_info_id")
+    private List<ApplicationRegistrationInfo> applicationRegistrationInfo = new ArrayList<>();
+
+//    @ManyToMany(mappedBy = "registrationInfos")
+//    private List<Application> applications = new ArrayList<>();
 }
