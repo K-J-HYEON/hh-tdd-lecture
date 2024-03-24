@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ApplicationRepository extends JpaRepository<Application, Long> {
-    List<ApplicationResponse> findByApplicationId(Long applicationId);
+    List<ApplicationResponse> findByApplicationId(Long applicationId, String name);
 }
