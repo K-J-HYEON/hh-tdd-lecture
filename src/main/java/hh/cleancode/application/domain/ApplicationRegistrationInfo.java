@@ -10,7 +10,8 @@ import lombok.*;
 public class ApplicationRegistrationInfo {
 
     @Id @GeneratedValue
-    private Long id;
+    @Column(name = "application_registration_info_id")
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "application_id")
