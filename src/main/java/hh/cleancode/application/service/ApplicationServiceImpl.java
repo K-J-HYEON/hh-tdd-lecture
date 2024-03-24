@@ -3,14 +3,13 @@ package hh.cleancode.application.service;
 import hh.cleancode.application.domain.Application;
 import hh.cleancode.application.dto.request.ApplicationRequest;
 import hh.cleancode.application.repository.ApplicationRepository;
-import jakarta.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.Slf4j;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.transaction.annotation.Transactional;
 
-@Slf4j
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class ApplicationServiceImpl implements ApplicationService {
 
     private final ApplicationRepository applicationRepository;
