@@ -36,7 +36,7 @@ public class LectureController {
     public void enrollLecture(@PathVariable String lectureId, @RequestBody EnrollLectureReq req) {
         String userId = req.getUserId();
         LectureDto lectureDto = lectureService.getLectureDtoByLectureId(lectureId);
-        if (lectureDto.getMaxEnrollment() <= lectureDto.getCurrentEnrollment()) {
+        if (lectureDto.getEnrollmentMax() <= lectureDto.getEnrollmentNumber()) {
             throw new RuntimeException("정원 초과되었습니다.");
         }
 
