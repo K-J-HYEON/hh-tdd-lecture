@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EnrollmentService {
@@ -19,12 +20,13 @@ public class EnrollmentService {
 
     // 특강신청 등록 진행
     @Transactional
-    public void saveEnrollmentStatus(String lectureId, String userId, EnrollmentStatus status) {
+    public Optional<Enrollment> saveEnrollmentStatus(String lectureId, String userId, EnrollmentStatus status) {
         List<Enrollment> enrollmentList = enrollmentRepository.findbyIdLectureIdAndUserIdAndStatus(userId, lectureId, status);
         if (!CollectionUtils.isEmpty(enrollmentList)) {
             throw new RuntimeException("신청이 진행 중입니다.");
         }
         enrollmentRepository.save(new Enrollment(new EnrollmentId(userId, lectureId), status));
+        return null;
     }
 
     // 등록되었는지 확인
