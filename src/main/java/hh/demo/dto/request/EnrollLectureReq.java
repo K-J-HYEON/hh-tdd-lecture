@@ -13,6 +13,11 @@ public class EnrollLectureReq {
     @NotNull
     private String lectureId;
 
+    public EnrollLectureReq(String userId, String lectureId) {
+        this.userId = userId;
+        this.lectureId = lectureId;
+    }
+
     public String getUserId() {
         return null;
     }
