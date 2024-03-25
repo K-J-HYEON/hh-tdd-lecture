@@ -3,6 +3,7 @@ package hh.demo.service;
 import hh.demo.TestException;
 import hh.demo.domain.Enrollment;
 import hh.demo.domain.EnrollmentStatus;
+import hh.demo.dto.request.EnrollLectureReq;
 import hh.demo.repository.EnrollmentRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,17 +11,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import static org.mockito.Matchers.anyString;
+import java.util.Optional;
 import static org.mockito.Mockito.when;
-
-
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /*
  * 특강 신청 테스트
  * 1. 특강 신청 성공
- * 2. 특강이 없을 경우
- * 3. 신청자가 이미 특강을 신청한 경우
- * 4. 특강이 다찼을 경우
+ * 2. 다른 신청자가 이미 특강을 신청한 경우
+ * 3. 특강 신청이 30명 초과됐을 경우
  * */
 
 @ExtendWith(MockitoExtension.class)
@@ -30,36 +30,55 @@ class EnrollmentServiceTest {
     @Mock
     EnrollmentRepository enrollmentRepository;
 
+
 //    1. 특강 신청 성공
     @Test
     @DisplayName("특강 신청 성공")
-    void EnrollmentTest() throws InterruptedException {
-        String enrollmentId = "test1";
-        String userId = "test2";
-        when(enrollmentRepository.findByIdLectureIdAndUserId(enrollmentId, userId)).thenReturn(new Enrollment(enrollmentId, userId));
-        Enrollment savedUser = new Enrollment(enrollmentId, userId);
-        when(enrollmentRepository.findbyIdLectureIdAndUserIdAndStatus(anyString(), anyString())).thenReturn(savedUser);
-        Enrollment result = sut.updateEnrollmentStatus(EnrollmentStatus.ENROLL_SUCCESS);
-        assert result.equals(savedUser);
+    void EnrollmentTest() throws Exception {
+        // given
+        String userId = "test1";
+        String lectureId = "test2";
+        EnrollLectureReq req = new EnrollLectureReq(userId, lectureId);
+        EnrollmentStatus status = EnrollmentStatus.ENROLL_SUCCESS;
+
+        // when
+        Optional<Enrollment> enrollment = sut.saveEnrollmentStatus(userId, lectureId, status);
+
+        // then
+        assertThat(enrollment.equals(lectureId)).isEqualTo(lectureId);
     }
 
-    // 특강이 없으면 예외를 반환
-    @Test
-    @DisplayName("특강이 없으면 예외를 반환")
-    void EnrollmentTest2() throws InterruptedException {
-        String enrollmentId = "test1";
-        String userId = "test2";
-        when(enrollmentRepository.findByIdLectureIdAndUserId(enrollmentId, userId)).thenReturn(null);
-        Exception e = null;
 
-        try {
-            Enrollment enrollment = sut.saveEnrollmentStatus(enrollmentId, userId, EnrollmentStatus.ENROLLING);
-        } catch (Exception exception) {
-            e = exception;
+
+    // 다른 신청자가 이미 특강을 신청한 경우
+    @Test
+    @DisplayName("다른 신청자가 이미 특강을 신청한 경우")
+    void EnrollmentTest2() throws Exception {
+        // Given
+        String userId = "test1";
+        String lectureId = "test2";
+        EnrollLectureReq req = new EnrollLectureReq(userId, lectureId);
+        sut.existEnrollByLectureIdAndUserId(userId, lectureId);
+
+        // when ** then
+        assertThrows(RuntimeException.class, () -> {
+            enrollmentRepository.findByIdLectureIdAndUserId(userId, lectureId);
+        });
+    }
+
+    @Test
+    @DisplayName("특강 신청이 30명 초과됐을 경우")
+    void EnrollmentTest3() throws Exception {
+        String userId = "test1";
+        String lectureId = "test2";
+        EnrollLectureReq req = new EnrollLectureReq(userId, lectureId);
+
+        for (long i = 0; i < 30; i++) {
+            enrollmentRepository.findByIdLectureIdAndUserId(lectureId, userId);
         }
 
-        assert e != null;
-        assert e instanceof TestException;
-        assert ((TestException) e).getMessage().equals(EnrollmentStatus.ENROLL_FAIL);
+        assertThrows(RuntimeException.class, () -> {
+            sut.existEnrollByLectureIdAndUserId(userId, lectureId);
+        });
     }
 }
