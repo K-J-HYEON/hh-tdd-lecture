@@ -8,8 +8,12 @@ import lombok.Getter;
 public class EnrollLectureReq {
 
     @NotNull
-    private long userId;
+    private String userId;
 
     @NotNull
-    private long lectureId;
+    private String lectureId;
+
+    public String getUserId() {
+        return null;
+    }
 }
