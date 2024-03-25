@@ -8,6 +8,8 @@ import hh.demo.service.EnrollmentService;
 import hh.demo.service.LectureService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.CannotAcquireLockException;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.retry.annotation.Recover;
 
@@ -24,7 +26,13 @@ public class LectureController {
         this.lectureService = lectureService;
     }
 
+
     @PostMapping
+    @Retryable(
+            value = {CannotAcquireLockException.class},
+            maxAttempts = 3,
+            backoff = @Backoff(delay = 1000)
+    )
     public void enrollLecture(@PathVariable String lectureId, @RequestBody EnrollLectureReq req) {
         String userId = req.getUserId();
         LectureDto lectureDto = lectureService.getLectureDtoByLectureId(lectureId);
