@@ -49,7 +49,7 @@ public class LectureController {
     @Recover
     public void removeEnrollment(CannotAcquireLockException e, String lectureId, EnrollLectureReq req) {
         enrollmentService.deleteEnrollment(lectureId, req.getUserId());
-        throw new RuntimeException("특강 신청이 실패하였습니다.")
+        throw new RuntimeException("특강 신청이 실패하였습니다.");
     }
 
 
