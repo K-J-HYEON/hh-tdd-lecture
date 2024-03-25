@@ -17,5 +17,4 @@ public class EnrollmentId implements Serializable {
 
     @Column(name = "lecture_id")
     private String lectureId;
-
 }
