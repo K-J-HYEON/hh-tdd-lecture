@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
@@ -28,4 +30,28 @@ public class Lecture {
     @Column(name = "enrollment_number")
     @NotNull
     private long enrollmentNumber;
+
+    public void updateEnrollmentNumber(long enrollmentNumber) {
+        this.enrollmentNumber = enrollmentNumber;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getLectureDate() {
+        return lectureDate;
+    }
+
+    public long getEnrollmentMax() {
+        return enrollmentMax;
+    }
+
+    public long getEnrollmentNumber() {
+        return enrollmentNumber;
+    }
 }

@@ -1,6 +1,5 @@
 package hh.demo.domain;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -24,7 +23,11 @@ public class Enrollment {
     @NotNull
     private EnrollmentStatus enrollmentStatus;
 
-    public void updateEnrollmentStatus(EnrollmentStatus enrollmentStatus) {
+    public Enrollment(EnrollmentId enrollmentId, EnrollmentStatus status) {
+        this.enrollmentStatus = status;
+    }
+
+    public void updatEnrollmentStatus(EnrollmentStatus enrollmentStatus) {
         this.enrollmentStatus = enrollmentStatus;
     }
 }

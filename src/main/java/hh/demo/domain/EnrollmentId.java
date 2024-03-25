@@ -17,4 +17,9 @@ public class EnrollmentId implements Serializable {
 
     @Column(name = "lecture_id")
     private String lectureId;
+
+    public EnrollmentId(String userId, String lectureId) {
+        this.userId = userId;
+        this.lectureId = lectureId;
+    }
 }
