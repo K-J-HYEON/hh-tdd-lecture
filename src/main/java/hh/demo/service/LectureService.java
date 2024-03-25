@@ -22,16 +22,16 @@ public class LectureService {
     @Transactional
     public LectureDto getLectureDtoByLectureId(String lectureId) {
         Lecture lecture = getLectureIdByLecture(lectureId);
-        return new LectureDto(lecture.getMaxEnrollment(), lecture.getCurrentEnrollment());
+        return new LectureDto(lecture.getEnrollmentMax(), lecture.getEnrollmentNumber());
     }
 
     @Transactional
     public void updateLectureEnrollment(String lecturerId) {
         Lecture lecture = lectureRepository.findWithLockById(lecturerId);
-        if (lecture.getCurrentEnrollment() + 1 > lecture.getMaxEnrollment()) {
+        if (lecture.getEnrollmentNumber() + 1 > lecture.getEnrollmentMax()) {
             throw new RuntimeException("정원 초과");
         }
-        lecture.updateCurrentEnrollment(lecture, getCurrentEnrollment() + 1);
+        lecture.updateEnrollmentNumber(lecture.getEnrollmentNumber() + 1);
         lectureRepository.saveAndFlush(lecture);
     }
 

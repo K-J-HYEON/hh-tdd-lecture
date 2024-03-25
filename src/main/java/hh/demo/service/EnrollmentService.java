@@ -37,7 +37,7 @@ public class EnrollmentService {
     @Transactional
     public void updateEnrollmentStatus(String lectureId, String userId, EnrollmentStatus status) {
         Enrollment enrollment = enrollmentRepository.findByIdLectureIdAndUserId(lectureId, userId).orElseThrow(() -> new RuntimeException("신청 정보가 없습니다.,"));
-        enrollment.updateEnrollmentStatus(status);
+        enrollment.updatEnrollmentStatus(status);
     }
 
     // 등록 삭제
