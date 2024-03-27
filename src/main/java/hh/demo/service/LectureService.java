@@ -1,16 +1,14 @@
 package hh.demo.service;
 
-
 import hh.demo.domain.Lecture;
 import hh.demo.dto.request.LectureDto;
 import hh.demo.repository.LectureRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Slf4j
 public class LectureService {
     private final LectureRepository lectureRepository;
