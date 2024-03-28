@@ -2,13 +2,11 @@ package hh.demo.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "Enrollment")
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class Enrollment {
 
     @Id
@@ -28,6 +26,11 @@ public class Enrollment {
     }
 
     public void updatEnrollmentStatus(EnrollmentStatus enrollmentStatus) {
+        this.enrollmentStatus = enrollmentStatus;
+    }
+
+    public Enrollment(Enrollment id, EnrollmentStatus enrollmentStatus) {
+        this.id = id;
         this.enrollmentStatus = enrollmentStatus;
     }
 }
