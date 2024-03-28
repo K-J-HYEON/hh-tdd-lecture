@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 @Embeddable
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class EnrollmentId implements Serializable {
 
     @Column(name = "user_id")
