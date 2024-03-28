@@ -1,18 +1,16 @@
 package hh.demo.dto.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
-public class LectureDto {
+public class LectureReq {
 
     private long enrollmentMax;
 
     private long enrollmentNumber;
 
-    public LectureDto(long enrollmentMax, long enrollmentNumber) {
+    public LectureReq(long enrollmentMax, long enrollmentNumber) {
         this.enrollmentMax = enrollmentMax;
         this.enrollmentNumber = enrollmentNumber;
     }
