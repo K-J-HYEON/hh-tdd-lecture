@@ -2,7 +2,7 @@ package hh.demo.controller;
 
 import hh.demo.domain.EnrollmentStatus;
 import hh.demo.dto.request.EnrollLectureReq;
-import hh.demo.dto.request.LectureDto;
+import hh.demo.dto.request.LectureReq;
 import hh.demo.dto.response.EnrollLectureRes;
 import hh.demo.service.EnrollmentService;
 import hh.demo.service.LectureService;
@@ -35,8 +35,8 @@ public class LectureController {
     )
     public void enrollLecture(@PathVariable String lectureId, @RequestBody EnrollLectureReq req) {
         String userId = req.getUserId();
-        LectureDto lectureDto = lectureService.getLectureDtoByLectureId(lectureId);
-        if (lectureDto.getEnrollmentMax() <= lectureDto.getEnrollmentNumber()) {
+        LectureReq lectureReq = lectureService.getLectureDtoByLectureId(lectureId);
+        if (lectureReq.getEnrollmentMax() <= lectureReq.getEnrollmentNumber()) {
             throw new RuntimeException("정원 초과되었습니다.");
         }
 
