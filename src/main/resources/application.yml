@@ -3,7 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:h2:mem:library;MODE=MYSQL;NON_KEYWORDS=USER
+#    url: jdbc:h2:mem:library;MODE=MYSQL;NON_KEYWORDS=USER
+    url: jdbc:h2:tcp://localhost/~/test  # 2번째 실행 : H2 접속 정보
+#    url: jdbc:h2:~/test # 1번째 실행
     username: sa # username과 password는 자신의 설정에 맞게
     password:
     driver-class-name: org.h2.Driver
