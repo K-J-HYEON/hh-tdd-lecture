@@ -1,7 +1,7 @@
 package hh.demo.service;
 
 import hh.demo.domain.Lecture;
-import hh.demo.dto.request.LectureDto;
+import hh.demo.dto.request.LectureReq;
 import hh.demo.repository.LectureRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,9 +18,9 @@ public class LectureService {
     }
 
     @Transactional
-    public LectureDto getLectureDtoByLectureId(String lectureId) {
+    public LectureReq getLectureDtoByLectureId(String lectureId) {
         Lecture lecture = getLectureIdByLecture(lectureId);
-        return new LectureDto(lecture.getEnrollmentMax(), lecture.getEnrollmentNumber());
+        return new LectureReq(lecture.getEnrollmentMax(), lecture.getEnrollmentNumber());
     }
 
     @Transactional
