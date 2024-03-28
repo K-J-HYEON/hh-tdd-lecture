@@ -16,6 +16,14 @@ public class Lecture {
     @NotNull
     private String id;
 
+    @Column(name = "lecture_name")
+    @NotNull
+    private String name;
+
+    @Column(name = "lecture_teacher")
+    @NotNull
+    private String teacher;
+
     @Column(name = "lecture_date")
     @NotNull
     private LocalDateTime lectureDate;
