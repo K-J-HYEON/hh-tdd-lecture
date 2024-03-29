@@ -1,5 +1,6 @@
 package hh.demo.domain.enrollment;
 
+import hh.demo.domain.lecture.Lecture;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -8,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 //@NoArgsConstructor
 //@AllArgsConstructor
 public class Enrollment {
+
 
     @Id
     @GeneratedValue
@@ -20,6 +22,10 @@ public class Enrollment {
     @Enumerated(EnumType.STRING)
     @NotNull
     private EnrollmentStatus enrollmentStatus;
+
+    @ManyToOne
+    @JoinColumn(name = "lecture_id")
+    private Lecture lecture;
 
     public Enrollment(EnrollmentId enrollmentId, EnrollmentStatus status) {
         this.enrollmentStatus = status;

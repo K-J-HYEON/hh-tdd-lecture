@@ -1,9 +1,7 @@
 package hh.demo.domain.lecture;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import hh.demo.domain.enrollment.Enrollment;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
@@ -35,6 +33,11 @@ public class Lecture {
     @Column(name = "enrollment_number")
     @NotNull
     private long enrollmentNumber;
+
+    // 뭔가 이상
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private Enrollment enrollment;
 
     public void updateEnrollmentNumber(long enrollmentNumber) {
         this.enrollmentNumber = enrollmentNumber;
