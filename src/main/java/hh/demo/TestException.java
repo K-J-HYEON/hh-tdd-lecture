@@ -1,6 +1,6 @@
 package hh.demo;
 
-import hh.demo.domain.EnrollmentStatus;
+import hh.demo.domain.enrollment.EnrollmentStatus;
 import lombok.Getter;
 
 @Getter

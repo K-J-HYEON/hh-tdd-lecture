@@ -1,4 +1,4 @@
-package hh.demo.domain;
+package hh.demo.domain.enrollment;
 
 public enum EnrollmentStatus {
     ENROLLING,

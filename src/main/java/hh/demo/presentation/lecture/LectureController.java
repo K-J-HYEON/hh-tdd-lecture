@@ -1,20 +1,19 @@
-package hh.demo.controller;
+package hh.demo.presentation.lecture;
 
-import hh.demo.domain.EnrollmentStatus;
-import hh.demo.dto.request.EnrollLectureReq;
-import hh.demo.dto.request.LectureReq;
-import hh.demo.dto.response.EnrollLectureRes;
-import hh.demo.service.EnrollmentService;
-import hh.demo.service.LectureService;
-import lombok.RequiredArgsConstructor;
+import hh.demo.domain.enrollment.EnrollmentStatus;
+import hh.demo.presentation.dto.request.EnrollLectureReq;
+import hh.demo.presentation.dto.request.LectureReq;
+import hh.demo.presentation.dto.response.EnrollLectureRes;
+import hh.demo.domain.enrollment.infra.EnrollmentService;
+import hh.demo.domain.lecture.infra.LectureService;
 import org.springframework.dao.CannotAcquireLockException;
 import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.retry.annotation.Recover;
 
 @RestController
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @RequestMapping("/lecture/{lectureId}")
 public class LectureController {
 
@@ -27,6 +26,7 @@ public class LectureController {
     }
 
 
+    // 특강 신청
     @PostMapping
     @Retryable(
             value = {CannotAcquireLockException.class},
@@ -54,6 +54,8 @@ public class LectureController {
         enrollmentService.updateEnrollmentStatus(lectureId, userId, EnrollmentStatus.ENROLL_SUCCESS);
     }
 
+
+    // 특강 등록 실패
     @Recover
     public void removeEnrollment(CannotAcquireLockException e, String lectureId, EnrollLectureReq req) {
         enrollmentService.deleteEnrollment(lectureId, req.getUserId());
@@ -61,7 +63,7 @@ public class LectureController {
     }
 
 
-    // 1. lecture 조회
+    // 1. 특  조회
     @GetMapping
     public EnrollLectureRes getLectureEnrollmentResult(@PathVariable String lectureId, @RequestParam String userId) {
         boolean enrollmentResult = enrollmentService.existEnrollByLectureIdAndUserId(lectureId, userId);

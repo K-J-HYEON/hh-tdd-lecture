@@ -1,12 +1,12 @@
-package hh.demo.service;
+package hh.demo.domain.enrollment.infra;
 
-import hh.demo.domain.Enrollment;
-import hh.demo.domain.EnrollmentId;
-import hh.demo.domain.EnrollmentStatus;
-import hh.demo.repository.EnrollmentRepository;
+import hh.demo.domain.enrollment.Enrollment;
+import hh.demo.domain.enrollment.EnrollmentId;
+import hh.demo.domain.enrollment.EnrollmentStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+
 import java.util.List;
 import java.util.Optional;
 

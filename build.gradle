@@ -37,5 +37,6 @@ dependencies {
 }
 
 tasks.named('test') {
+	testCompile("org.junit.jupiter:junit-jupiter-params:5.7.0")
 	useJUnitPlatform()
 }

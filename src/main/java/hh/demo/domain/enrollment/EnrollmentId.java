@@ -1,9 +1,7 @@
-package hh.demo.domain;
+package hh.demo.domain.enrollment;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -22,4 +20,6 @@ public class EnrollmentId implements Serializable {
         this.userId = userId;
         this.lectureId = lectureId;
     }
+
+
 }

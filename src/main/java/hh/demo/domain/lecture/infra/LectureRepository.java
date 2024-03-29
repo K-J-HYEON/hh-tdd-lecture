@@ -1,6 +1,6 @@
-package hh.demo.repository;
+package hh.demo.domain.lecture.infra;
 
-import hh.demo.domain.Lecture;
+import hh.demo.domain.lecture.Lecture;
 import jakarta.persistence.LockModeType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;

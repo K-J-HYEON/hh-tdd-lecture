@@ -1,8 +1,8 @@
-package hh.demo.repository;
+package hh.demo.domain.enrollment.infra;
 
-import hh.demo.domain.Enrollment;
-import hh.demo.domain.EnrollmentId;
-import hh.demo.domain.EnrollmentStatus;
+import hh.demo.domain.enrollment.Enrollment;
+import hh.demo.domain.enrollment.EnrollmentId;
+import hh.demo.domain.enrollment.EnrollmentStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

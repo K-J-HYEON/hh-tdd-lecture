@@ -1,4 +1,4 @@
-package hh.demo.domain;
+package hh.demo.domain.lecture;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

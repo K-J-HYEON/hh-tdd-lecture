@@ -1,8 +1,7 @@
-package hh.demo.service;
+package hh.demo.domain.lecture.infra;
 
-import hh.demo.domain.Lecture;
-import hh.demo.dto.request.LectureReq;
-import hh.demo.repository.LectureRepository;
+import hh.demo.domain.lecture.Lecture;
+import hh.demo.presentation.dto.request.LectureReq;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
